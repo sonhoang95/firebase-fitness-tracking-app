@@ -35,8 +35,10 @@ const ExerciseList = () => {
   const [showModal, setShowModal] = useState(false);
   const exercisesCollectionRef = collection(db, 'exercises');
 
+  let q = query(exercisesCollectionRef, orderBy('createdAt'));
+
   useEffect(() => {
-    onSnapshot(exercisesCollectionRef, snapshot => {
+    onSnapshot(q, snapshot => {
       setExercises(snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })));
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -48,10 +50,7 @@ const ExerciseList = () => {
   };
 
   const filterCategory = category => {
-    let q = null;
-    if (category === 'all') {
-      q = query(exercisesCollectionRef, orderBy('createdAt'));
-    } else {
+    if (category !== 'all') {
       q = query(
         exercisesCollectionRef,
         where('category', '==', category),
@@ -69,7 +68,7 @@ const ExerciseList = () => {
       <section className="flex flex-col">
         <div className="grid grid-cols-5 justify-items-center border-b-2 border-gray-300 py-3">
           {titles.map(item => (
-            <h1 key={item.id} className="text-blue-600 font-bold capitalize">
+            <h1 key={item.id} className="text-blue-700 font-bold capitalize">
               {item.title}
             </h1>
           ))}
@@ -87,10 +86,13 @@ const ExerciseList = () => {
                 <h2>{sets}</h2>
                 <h2>{weight}</h2>
                 <div className="flex gap-2">
-                  <button>
+                  <button className="text-orange-400">
                     <FaEdit />
                   </button>
-                  <button onClick={() => handleDeleteExercise(id)}>
+                  <button
+                    className="text-red-600"
+                    onClick={() => handleDeleteExercise(id)}
+                  >
                     <FaTrash />
                   </button>
                 </div>

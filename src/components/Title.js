@@ -5,8 +5,10 @@ const Title = ({ title, position, largeTitle }) => {
     <div className="container mx-auto">
       <h1
         className={`${
-          largeTitle ? 'text-4xl tracking-wide' : 'text-2xl'
-        } text-gray-700 font-bold capitalize ${
+          largeTitle
+            ? 'text-4xl tracking-wide text-white'
+            : 'text-2xl text-gray-700'
+        }  font-bold capitalize ${
           position === 'center' ? 'text-center' : null
         }`}
       >

@@ -6,7 +6,7 @@ const Category = ({ categories, onFilterCategory }) => {
       {categories.map(category => (
         <button
           key={category.id}
-          className="bg-blue-600 px-4 py-1 rounded-lg text-white hover:bg-blue-800 capitalize"
+          className="bg-blue-700 px-4 py-1 rounded-lg text-white hover:bg-blue-800 capitalize"
           onClick={() => onFilterCategory(category.name.toLowerCase())}
         >
           {category.name}
